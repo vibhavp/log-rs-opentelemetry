@@ -1,0 +1,23 @@
+[package]
+name = "log-opentelemetry"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+log = "0.4"
+opentelemetry = {version = "0.17", features = ["log", "trace"]}
+opentelemetry-semantic-conventions = "0.9"
+lazy_static = "1"
+sval = { version = "1.0.0-alpha.5", optional = true }
+hex = { version = "0.4", optional = true }
+take_mut = { version = "0.2", optional = true }
+
+[patch.crates-io]
+opentelemetry = { git = "https://github.com/vibhavp/opentelemetry-rust", branch = "main"}
+opentelemetry-otlp = { git = "https://github.com/vibhavp/opentelemetry-rust", branch = "main"}
+
+[features]
+default = []
+kv_unstable = ["log/kv_unstable", "log/kv_unstable_sval", "log/std", "sval/std", "sval/arbitrary-depth", "hex", "take_mut"]
